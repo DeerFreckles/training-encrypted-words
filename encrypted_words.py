@@ -1,26 +1,13 @@
-"""
-
-
-"""
-
-
 import math
 
-
-# Add any extra import statements you may need here
-
-
-# Add any helper functions you may need here
-
-
-def findEncryptedWord(s):
-
-
-# Write your code here
-
-
-# These are the tests we use to determine if the solution is correct.
-# You can add your own at the bottom, but they are otherwise not editable!
+def findEncryptedWord(S):
+    if len(S) == 0:                 # Hard-stop for recursive endpoints
+        return ""
+    n = math.ceil(len(S)/2)-1       # Midpoint calculation
+    R = S[n]                        # Initial appending of middle-est character
+    R += findEncryptedWord(S[:n])   # Recursive calls
+    R += findEncryptedWord(S[n+1:])
+    return R                        # Final string returned (if S is originally not empty)
 
 def printString(string):
     print('[\"', string, '\"]', sep='', end='')
@@ -59,3 +46,7 @@ if __name__ == "__main__":
     check(expected_2, output_2)
 
     # Add your own test cases here
+    s3 = "abcxcba"
+    expected_3 = "xbacbca"
+    output_3 = findEncryptedWord(s3)
+    check(expected_3, output_3)
